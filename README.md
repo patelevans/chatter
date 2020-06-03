@@ -1,8 +1,6 @@
 # Introducing Chatter, a basic social media website!
 
-To begin, make sure the terminal is in the directory containing application.py.
-Then, in the terminal, execute "flask run".
-Click on the link in the terminal, and the application should appear in a new tab or window.
+To begin, please go to https://cs50-chatter-ep.herokuapp.com.
 
 From here, you can do anything you want!
 The first page that appears should be the login page. In the users.txt file, I've provided some usernames and passwords; feel free to use them.
