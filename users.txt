@@ -1,0 +1,7 @@
+username, password
+
+evanspatel, ep123
+doglover123, ilovedogs
+notcs50courseheads, cs50rules
+randomuser123, random
+markzuck, facebook

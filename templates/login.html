@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Log In
+{% endblock %}
+
+{% block main %}
+  <form action="/login" method="post">
+    <div class="form-group">
+      <input autocomplete="off" autofocus class="form-control" id="usernamefield" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+      <input class="form-control" id="pwfield" name="password" placeholder="Password" type="password">
+    </div>
+    <button class="btn btn-primary" id="loginsubmit" type="submit">Log In</button>
+  </form>
+	<script type="text/javascript">
+	  $(function() {
+        $('#loginsubmit').attr("disabled", true);
+    });
+	  $(function() {
+	    $("#usernamefield").keyup(function () {
+	      if ($(this).val() == "") {
+	        $("#loginsubmit").prop("disabled", true);
+	      } else {
+	        $("#loginsubmit").prop("disabled", false);
+	      }
+	    });
+	  });
+	  $(function() {
+	    $("#pwfield").keyup(function () {
+	      if ($(this).val() == "") {
+	        $("#loginsubmit").prop("disabled", true);
+	      } else {
+	        $("#loginsubmit").prop("disabled", false);
+	      }
+	    });
+	  });
+	</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block main %}
+  <form action="/register" method="post">
+    <div class="form-group">
+      <input autocomplete="off" autofocus class="form-control" id="usernamefield" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+      <input class="form-control" id="pwfield" name="password" placeholder="Password" type="password">
+    </div>
+    <div class="form-group">
+      <input class="form-control" id="confirmfield" name="confirmation" placeholder="Confirm Password" type="password">
+    </div>
+    <button class="btn btn-primary" id="registersubmit" type="submit">Register</button>
+  </form>
+  <script type="text/javascript">
+	  $(function() {
+        $('#registersubmit').attr("disabled", true);
+    });
+	  $(function() {
+	    $("#usernamefield").keyup(function () {
+	      if ($(this).val() == "") {
+	        $("#registersubmit").prop("disabled", true);
+	      } else {
+	        $("#registersubmit").prop("disabled", false);
+	      }
+	    });
+	  });
+	  $(function() {
+	    $("#pwfield").keyup(function () {
+	      if ($(this).val() == "") {
+	        $("#registersubmit").prop("disabled", true);
+	      } else {
+	        $("#registersubmit").prop("disabled", false);
+	      }
+	    });
+	  });
+	  $(function() {
+	    $("#confirmfield").keyup(function () {
+	      if ($(this).val() == "") {
+	        $("#registersubmit").prop("disabled", true);
+	      } else {
+	        $("#registersubmit").prop("disabled", false);
+	      }
+	    });
+	  });
+	</script>
+{% endblock %}

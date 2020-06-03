@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Search
+{% endblock %}
+
+{% block main %}
+  <h1>Posts</h1>
+  <div class="container">
+    {% if no_posts == False %}
+      {% for post in posts %}
+        <div class="postcard">
+          <h3><a href="/post/{{ post['post_id'] }}">{{ post["title"] }}</a></h3>
+          <h4>by <a href="/profile/{{ post['user_id'] }}">{{ post["username"] }}</a> at {{ post["datetime"] }}</h4>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h2>There are no posts matching your search criteria.</h2>
+    {% endif %}
+  </div>
+
+  <h1>People</h1>
+  <div class="container">
+    {% if no_people == False %}
+      <table class="table">
+        <tbody>
+          {% for person in people %}
+            <tr>
+              <td>
+                <h4><a href="/profile/{{ person['user_id'] }}">{{ person["username"] }}</a></h4>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <h4>There are no people matching your search criteria.</h4>
+    {% endif %}
+  </div>
+{% endblock %}

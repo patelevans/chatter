@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+
+{% block main %}
+  <h1>{{ page_title }}</h1>
+  <table class="table">
+    <tbody>
+      {% if zero == True %}
+        <h4>Empty</h4>
+      {% else %}
+        {% for follow in follows %}
+          <tr>
+            <td>
+              <h4><a href="/profile/{{ follow['user_id'] }}">{{ follow["username"] }}</a></h4>
+            </td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ profiles[0]["username"] }}
+{% endblock %}
+
+{% block main %}
+  <div class="profilecard">
+    {% if profiles[0]["picture"] != None and profiles[0]["picture"] != '' %}
+      <img src="{{ profiles[0]['picture'] }}" alt="profile picture">
+    {% endif %}
+    <h1>{{ profiles[0]["username"] }}</h1>
+    {% if self_profile == True %}
+      <a href="/editprofile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
+      <a href="/followers"><button type="button" class="btn btn-secondary">My Followers</button></a>
+      <a href="/followees"><button type="button" class="btn btn-secondary">My Followees</button></a>
+    {% elif following == True %}
+      <form action="/unfollow" method="post">
+        <input type="hidden" name="user_id" value="{{ profiles[0]['user_id'] }}">
+        <button class="btn btn-danger" type="submit">Unfollow</button>
+      </form>
+    {% else %}
+      <form action="/follow" method="post">
+        <input type="hidden" name="user_id" value="{{ profiles[0]['user_id'] }}">
+        <button class="btn btn-primary" type="submit">Follow</button>
+      </form>
+    {% endif %}
+    {% if profiles[0]["about"] != None %}
+      <div class="container">
+        <h2>{{ profiles[0]["about"] }}</h2>
+      </div>
+    {% endif %}
+  </div>
+
+  {% for post in posts %}
+    <div class="postcard">
+      <h3><a href="/post/{{ post['post_id'] }}">{{ post["title"] }}</a></h3>
+      <h4>{{ post["datetime"] }}</h4>
+    </div>
+  {% endfor %}
+{% endblock %}

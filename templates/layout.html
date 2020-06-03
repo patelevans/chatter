@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+	  <!-- Bootstrap styles and custom styles -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="/static/styles.css" rel="stylesheet">
+
+		<title>Chatter: {% block title %}{% endblock %}</title>
+
+		<!-- JS for Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+		<!-- Import JQuery to use for disabling incomplete forms-->
+		<script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="/">Chatter</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			  {% if session.user_id %}
+			    <ul class="navbar-nav mr-auto">
+  			    <li class="nav-item">
+  						<a class="nav-link" href="/">Home</a>
+  					</li>
+  					<li class="nav-item">
+  						<a class="nav-link" href="/profile/{{ session.user_id }}">My Profile</a>
+  					</li>
+  					<li class="nav-item">
+  					  <a class="nav-link" href="/discover/people">Discover People</a>
+  					</li>
+  					<li class="nav-item">
+  					  <a class="nav-link" href="/discover/posts">Discover Posts</a>
+  					</li>
+  				</ul>
+  				<ul class="navbar-nav ml-auto mr-auto">
+  					<li class="nav-item">
+  					  <a class="nav-link" href="/newpost"><b>New Post</b></a>
+  					</li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0" action="/search" method="post">
+            <input class="form-control mr-sm-2" id="searchfield" name="keyword" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-dark my-2 my-sm-0" id="searchsubmit" type="submit">Search</button>
+          </form>
+					<ul class="navbar-nav ml-auto">
+					  <li class="nav-item">
+					    <a class="nav-link" href="/logout">Log Out</a>
+					  </li>
+					</ul>
+					<!--The following script using jQuery was referenced from https://blog.revillweb.com/jquery-disable-button-disabling-and-enabling-buttons-with-jquery-5e3ffe669ece-->
+					<script type="text/javascript">
+					  $(function() {
+                $('#searchsubmit').attr("disabled", true);
+            });
+					  $(function() {
+					    $("#searchfield").keyup(function () {
+					      if ($(this).val() == "") {
+					        $("#searchsubmit").prop("disabled", true);
+					      } else {
+					        $("#searchsubmit").prop("disabled", false);
+					      }
+					    });
+					  });
+					</script>
+			  {% else %}
+			    <ul class="navbar-nav ml-auto">
+  				  <li class="nav-item">
+  						<a class="nav-link" href="/login">Log In</a>
+  					</li>
+  					<li class="nav-item">
+  						<a class="nav-link" href="/register">Register</a>
+  					</li>
+					</ul>
+			  {% endif %}
+			</div>
+		</nav>
+
+		<div class="container">
+      {% block main %}{% endblock %}
+		</div>
+	</body>
+</html>
